@@ -2,30 +2,33 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import * as yup from "yup";
-// import { yupResolver } from "@hookform/resolvers/yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const Form = () => {
   const schema = yup.object().shape({
     name: yup.string().required(),
-    age: yup.number().required(),
+    age: yup.number().positive().integer().required(),
     gender: yup.string().required(),
-    mobile: yup.number().min(10).required(),
+    mobile: yup.string().min(10).max(10).required(),
     issueId: yup.string().required("ID Type is required"),
-    govtId: yup.string().when("issueId", {
-      is: "aadhar",
-      then: yup
-        .string()
-        .matches(/^\d{12}$/, "Invalid Aadhar ID")
-        .required("Govt ID is required"),
-      otherwise: yup
-        .string()
-        .matches(/^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/, "Invalid PAN ID")
-        .required("Govt ID is required"),
-    }),
+    govtId: yup
+      .string()
+      .test("govtId", "Invalid government ID", function (value) {
+        const issueId = this.parent.issueId;
+        if (issueId === "aadhar") {
+          return /^\d{12}$/.test(value);
+        } else if (issueId === "pan") {
+          return /^[\w\d]{10}$/.test(value);
+        }
+        return true;
+      }),
   });
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -72,11 +75,13 @@ const Form = () => {
             <option value="aadhar">Aadhar</option>
             <option value="pan">PAN</option>
           </select>
+          {errors.issueId && <p>{errors.issueId.message}</p>}
           <input
             type="text"
             placeholder="Enter Govt ID"
             {...register("govtId")}
           />
+          {errors.govtId && <p>{errors.govtId.message}</p>}
           <input type="submit" value="Submit" />
         </section>
       </form>
