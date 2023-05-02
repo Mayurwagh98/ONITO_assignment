@@ -6,9 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const Form = () => {
   const schema = yup.object().shape({
-    name: yup.string().required(),
-    age: yup.number().positive().integer().required(),
-    gender: yup.string().required(),
+    name: yup.string().required("Name is a Required Field!"),
+    age: yup.number().positive().integer().required("Age is a Required Field!"),
+    gender: yup.string().required("Gender is a Required Field!"),
     mobile: yup.string().min(10).max(10).required(),
     issueId: yup.string().required("ID Type is required"),
     govtId: yup
@@ -22,6 +22,10 @@ const Form = () => {
         }
         return true;
       }),
+    guardian: yup.string(),
+    guardian_name: yup.string(),
+    email: yup.string().email(),
+    emergency_no: yup.string().min(10).max(10).required(),
   });
 
   const {
@@ -45,6 +49,7 @@ const Form = () => {
     <div>
       <h2>Form</h2>
       <form onSubmit={handleSubmit(handleRegister)}>
+        {/* -------------- Personal Details ----------------- */}
         <section>
           <h3>Personal Details</h3>
           <label>Name</label>
@@ -53,6 +58,7 @@ const Form = () => {
             placeholder="Enter your name"
             {...register("name")}
           />
+          {errors.name && <p>{errors.name.message}</p>}
           <label>Age</label>
           <input
             type="number"
@@ -82,8 +88,35 @@ const Form = () => {
             {...register("govtId")}
           />
           {errors.govtId && <p>{errors.govtId.message}</p>}
-          <input type="submit" value="Submit" />
         </section>
+        {/* ----------------- Contact Details ---------------- */}
+        <section>
+          <h3>Contact Details</h3>
+          <label>Guardian Details</label>
+          <select {...register("guardian")}>
+            <option value="mother">Mother</option>
+            <option value="father">Father</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Enter Gaurdian Name"
+            {...register("guardian_name")}
+          />
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+            {...register("email")}
+          />
+          <label>Emergency Contact Number</label>
+          <input
+            type="text"
+            placeholder="Enter Emergency Number"
+            {...register("emergency_no")}
+          />
+        </section>
+        {/* ---------------- Address Details ------------------ */}
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );
