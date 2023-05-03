@@ -1,0 +1,45 @@
+table {
+    /* border: 1px solid red; */
+    width: 90%;
+    margin: 20px auto;
+}
+
+table>thead th {
+    /* border: 4px solid #4C3D3D; */
+    font-size: 18px;
+    line-height: 40px;
+    background-color: #F99B7D;
+}
+
+td {
+    /* border: 1px solid black; */
+    font-size: 17px;
+    padding: 10px;
+    background-color: #F1F6F9;
+}
+
+button {
+    margin: 5px;
+    color: #070A52;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 1px solid #2F0F5D;
+    cursor: pointer;
+    background: transparent;
+}
+.rows_per_page{
+    /* border: 1px solid red; */
+    width: 90%;
+    font-size: 17px;
+    cursor: pointer;
+}
+.rows_per_page > span{
+    margin-right: 5px;
+    font-weight: bold;
+    color: #070A52;
+}
+.rows_per_page > select{
+    cursor: pointer;
+}
