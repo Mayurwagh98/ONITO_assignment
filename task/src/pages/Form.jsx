@@ -74,15 +74,14 @@ const Form = () => {
 
   return (
     <div>
-      <h2>Registration Form</h2>
-      <button onClick={() => navigate("/dashboard")}>Dashboard</button>
-      <div>
-        {errors.name && <p>{errors.name.message}</p>}
-        {errors.age && <p>{errors.age.message}</p>}
-        {errors.mobile && <p>{errors.mobile.message}</p>}
-        {errors.govtId && <p>{errors.govtId.message}</p>}
-        {errors.issueId && <p>{errors.issueId.message}</p>}
-      </div>
+      <h2 style={{textDecoration:"underline", fontFamily:"sans-serif"}}>Registration Form</h2>
+      {/* <div className="error_div"> */}
+      {errors.name && <p>{errors.name.message}</p>}
+      {errors.age && <p>{errors.age.message}</p>}
+      {errors.mobile && <p>{errors.mobile.message}</p>}
+      {errors.govtId && <p>{errors.govtId.message}</p>}
+      {errors.issueId && <p>{errors.issueId.message}</p>}
+      {/* </div> */}
       <form onSubmit={handleSubmit(handleRegister)}>
         {/* -------------- Personal Details ----------------- */}
         <section className="personal_details">
