@@ -43,7 +43,8 @@ function TableWithPagination({ users }) {
           key={i}
           id={i}
           onClick={handleClick}
-          className={i === currentPage ? "active" : ""}
+          //   className={i === currentPage ? "active" : ""}
+          className="page_button"
         >
           {i}
         </button>
