@@ -39,13 +39,7 @@ function TableWithPagination({ users }) {
 
     for (let i = 1; i <= pageNumbers; i++) {
       pageList.push(
-        <button
-          key={i}
-          id={i}
-          onClick={handleClick}
-          //   className={i === currentPage ? "active" : ""}
-          className="page_button"
-        >
+        <button key={i} id={i} onClick={handleClick} className="page_button">
           {i}
         </button>
       );

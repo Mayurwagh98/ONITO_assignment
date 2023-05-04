@@ -14,6 +14,7 @@ const Form = () => {
   let [flag, setFlag] = useState(false);
   const [open, setOpen] = React.useState(false);
 
+  // ----------- exporting register and handleSubmit func from useForm---------------
   const {
     register,
     handleSubmit,
@@ -22,10 +23,11 @@ const Form = () => {
     resolver: yupResolver(schema),
   });
 
+  //  ----------------- posting the data -----------
   let handleRegister = async (data) => {
     await axios
-      .post("http://localhost:8080/user", data)
-      // .post("https://onito-backend-jwvv.onrender.com/user", data)
+      // .post("http://localhost:8080/user", data)
+      .post("https://onito-backend-jwvv.onrender.com/user", data)
       .then((res) => {
         console.log(res.data);
         setFlag(true);
@@ -45,7 +47,7 @@ const Form = () => {
       <h2 style={{ textDecoration: "underline", fontFamily: "sans-serif" }}>
         Registration Form
       </h2>
-
+      {/* ------------ modal for successful registration -------------- */}
       {flag ? (
         <Modal
           open={open}
@@ -57,8 +59,11 @@ const Form = () => {
           </Alert>
         </Modal>
       ) : null}
+
+      {/* ------------ modal for displaying errors --------------------  */}
       {errors && <ErrorAlert errors={errors} />}
 
+      {/* ------------- form ---------------- */}
       <form onSubmit={handleSubmit(handleRegister)}>
         {/* -------------- Personal Details ----------------- */}
         <section className="personal_details">

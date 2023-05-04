@@ -7,8 +7,8 @@ const Dashboard = () => {
   let [search, setSearch] = useState("");
   let getUsers = async () => {
     await axios
-      .get(`http://localhost:8080/user?q=${search}`)
-      // .get(`https://onito-backend-jwvv.onrender.com/user?q=${search}`)
+      // .get(`http://localhost:8080/user?q=${search}`)
+      .get(`https://onito-backend-jwvv.onrender.com/user?q=${search}`)
       .then((res) => {
         console.log(res.data);
 
@@ -20,45 +20,6 @@ const Dashboard = () => {
   useEffect(() => {
     getUsers();
   }, [search]);
-
-  //   const columns = [
-  //     {
-  //       name: "ID",
-  //       selector: (row) => row.id,
-  //     },
-  //     {
-  //       name: "Name",
-  //       selector: (row) => row.name,
-  //       sortable: true,
-  //     },
-  //     {
-  //       name: "Age",
-  //       selector: (row) => row.age,
-  //       sortable: true,
-  //     },
-  //     {
-  //       name: "Mobile",
-  //       selector: (row) => row.mobile,
-  //       sortable: true,
-  //     },
-  //     {
-  //       name: "Address",
-  //       selector: (row) => row.address,
-  //     },
-  //     {
-  //       name: "Govt ID",
-  //       selector: (row) => row.govtId,
-  //       sortable: true,
-  //     },
-  //     {
-  //       name: "Gaurdian details",
-  //       selector: (row) => row.guardian_name,
-  //     },
-  //     {
-  //       name: "Nationality",
-  //       selector: (row) => row.nationality,
-  //     },
-  //   ];
 
   return (
     <div>
@@ -79,7 +40,7 @@ const Dashboard = () => {
           }}
         />
       </div>
-      {/* <DataTable columns={columns} data={users} pagination fixedHeader /> */}
+
       <TableWithPagination users={users} />
     </div>
   );
