@@ -11,7 +11,7 @@ https://onito-assgnment.netlify.app
 - User can view his info on dashboard
 - Name, Age and Gender are required fields
 - Mobile and Emergency Number should be valid Indian number
-- User can search his/her profile based on name, age, guardian name, nationality, pan or aadhar number, mobile number
+- User can search his/her profile based on `name`, `age`, `guardian name`, `nationality`, `pan` or `aadhar number`, `mobile number`
 - Table with pagination and with an option to display number of rows based on his/her interest
 
 ### Tech Stacks
