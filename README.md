@@ -40,3 +40,4 @@ https://onito-assgnment.netlify.app
 
 ![Screenshot (951)](https://user-images.githubusercontent.com/69896733/236214217-c4c7d31b-0dd9-4adf-9686-34404f41cd3e.png)
 
+### To run the application you your local system do `npm i` and run `npm run dev` command.
