@@ -44,6 +44,7 @@ input {
     /* width: 60%; */
     border-radius: 10px;
     border: none;
+    
 }
 
 h3 {
@@ -55,7 +56,7 @@ h3 {
 
 }
 
-p, span {
+p, section span {
     color: red;
 }
 
@@ -147,4 +148,5 @@ p {
     border-radius: 5px;
     /* margin: 10px 0px; */
     cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
