@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./Form.css";
 import { useNavigate } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import Alert from "@mui/material/Alert";
 
 const Form = () => {
   let navigate = useNavigate();
+  let [flag, setFlag] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
   const schema = yup.object().shape({
     name: yup.string().required("Name is a Required Field!"),
     age: yup.string().required("Age is a Required Field!"),
@@ -44,7 +49,7 @@ const Form = () => {
     state: yup.string(),
     city: yup.string(),
     country: yup.string(),
-    pincode: yup.number(),
+    pincode: yup.string(),
     occupation: yup.string(),
     region: yup.string(),
     marital_status: yup.string(),
@@ -63,9 +68,14 @@ const Form = () => {
   let handleRegister = async (data) => {
     await axios
       .post("http://localhost:8080/user", data)
+      // .post("https://onito-backend-jwvv.onrender.com/user", data)
       .then((res) => {
         console.log(res.data);
-        alert("Reistration Successful!");
+        setFlag(true);
+        setOpen(true);
+        setTimeout(() => {
+          setOpen(false);
+        }, 1400);
       })
       .catch((e) => {
         console.log(e);
@@ -74,14 +84,29 @@ const Form = () => {
 
   return (
     <div>
-      <h2 style={{textDecoration:"underline", fontFamily:"sans-serif"}}>Registration Form</h2>
-      {/* <div className="error_div"> */}
+      <h2 style={{ textDecoration: "underline", fontFamily: "sans-serif" }}>
+        Registration Form
+      </h2>
+
+      {flag ? (
+        <Modal
+          open={open}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          style={{ border: "none" }}
+        >
+          <Alert variant="filled" severity="success" style={{ border: "none" }}>
+            Successfully Registered!
+          </Alert>
+        </Modal>
+      ) : null}
+
       {errors.name && <p>{errors.name.message}</p>}
       {errors.age && <p>{errors.age.message}</p>}
       {errors.mobile && <p>{errors.mobile.message}</p>}
+      {errors.emergency_no && <p>{errors.emergency_no.message}</p>}
       {errors.govtId && <p>{errors.govtId.message}</p>}
       {errors.issueId && <p>{errors.issueId.message}</p>}
-      {/* </div> */}
       <form onSubmit={handleSubmit(handleRegister)}>
         {/* -------------- Personal Details ----------------- */}
         <section className="personal_details">
