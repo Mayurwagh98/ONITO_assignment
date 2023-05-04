@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import * as yup from "yup";
@@ -7,6 +7,7 @@ import "./Form.css";
 import { useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import Alert from "@mui/material/Alert";
+import { ErrorAlert } from "../Components/ErrorAlert";
 
 const Form = () => {
   let navigate = useNavigate();
@@ -93,20 +94,14 @@ const Form = () => {
           open={open}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          style={{ border: "none" }}
         >
           <Alert variant="filled" severity="success" style={{ border: "none" }}>
             Successfully Registered!
           </Alert>
         </Modal>
       ) : null}
+      <ErrorAlert errors={errors} />
 
-      {errors.name && <p>{errors.name.message}</p>}
-      {errors.age && <p>{errors.age.message}</p>}
-      {errors.mobile && <p>{errors.mobile.message}</p>}
-      {errors.emergency_no && <p>{errors.emergency_no.message}</p>}
-      {errors.govtId && <p>{errors.govtId.message}</p>}
-      {errors.issueId && <p>{errors.issueId.message}</p>}
       <form onSubmit={handleSubmit(handleRegister)}>
         {/* -------------- Personal Details ----------------- */}
         <section className="personal_details">
